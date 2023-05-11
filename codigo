@@ -1,0 +1,241 @@
+// C++ code
+//
+//LEDS
+#define OLLEROS 13
+#define JOSE_HERNANDEZ 12
+#define JURAMENTO 11
+#define CONGRESO_TUCUMAN 10
+
+//DISPLAY
+#define A 3 
+#define B 7
+#define C 6
+#define D 8
+#define E 9
+#define F 4
+#define G 5
+//buzzer
+#define BUZZER 2
+//PULSADOR
+#define PULSE A0
+
+void EncenderDisplay(int numero);
+void EncenderEstacion(int led, int tiempo);
+void SonarBuzzer(int buzzer);
+
+void setup()
+{
+  //LEDS
+  pinMode(OLLEROS, OUTPUT);
+  pinMode(JOSE_HERNANDEZ, OUTPUT);
+  pinMode(JURAMENTO, OUTPUT);
+  pinMode(CONGRESO_TUCUMAN, OUTPUT);
+  //DISPLAY
+  pinMode(A, OUTPUT);
+  pinMode(B, OUTPUT);
+  pinMode(C, OUTPUT);
+  pinMode(D, OUTPUT);
+  pinMode(E, OUTPUT);
+  pinMode(F, OUTPUT);
+  pinMode(G, OUTPUT);
+  //BUZZER
+  pinMode(BUZZER, OUTPUT);
+  //PULSADOR
+  pinMode(PULSE,INPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  int pulsador = analogRead(PULSE);
+  Serial.println(pulsador);
+  if(pulsador == 1023)
+  {
+    EncenderEstacion(OLLEROS, 100);
+    EncenderEstacion(JOSE_HERNANDEZ, 100);
+    EncenderEstacion(JURAMENTO, 100);
+    EncenderEstacion(CONGRESO_TUCUMAN,100);
+  }
+ 
+}
+
+
+void SonarBuzzer(int buzzer)
+{
+  tone(buzzer,300,500);
+  noTone(500);
+}
+
+void EncenderEstacion(int led, int tiempo)
+{
+  switch(led)
+  {
+    case OLLEROS:
+    	digitalWrite(OLLEROS, HIGH);
+  		delay(tiempo);
+    	SonarBuzzer(BUZZER);
+    	EncenderDisplay(3);
+    	digitalWrite(OLLEROS, LOW);
+  		delay(tiempo);
+    	break;
+    case JOSE_HERNANDEZ:
+    	digitalWrite(JOSE_HERNANDEZ, HIGH);
+    	SonarBuzzer(BUZZER);
+    	EncenderDisplay(2);
+    	delay(tiempo);
+    	digitalWrite(JOSE_HERNANDEZ, LOW);
+    	break;
+    case JURAMENTO:
+    	digitalWrite(JURAMENTO, HIGH);
+  		delay(tiempo);
+    	SonarBuzzer(BUZZER);
+    	EncenderDisplay(1);
+    	digitalWrite(JURAMENTO, LOW);
+  		delay(tiempo);
+    	break;
+    case CONGRESO_TUCUMAN:
+    	digitalWrite(CONGRESO_TUCUMAN, HIGH);
+  		delay(tiempo);
+        SonarBuzzer(BUZZER);
+    	EncenderDisplay(0);
+    	digitalWrite(CONGRESO_TUCUMAN, LOW);
+  		delay(tiempo);
+    	break;
+    }
+}
+
+void EncenderDisplay(int numero)
+{
+  switch(numero)
+  {
+  	case 1:
+    	digitalWrite(B, HIGH);
+    	digitalWrite(C, HIGH);
+  		delay(1000);
+    	digitalWrite(B, LOW);
+    	digitalWrite(C , LOW);
+    	break;
+    case 2:
+        digitalWrite(A, HIGH);
+    	digitalWrite(B, HIGH);
+        digitalWrite(D, HIGH);
+    	digitalWrite(E, HIGH);
+        digitalWrite(G, HIGH);
+  		delay(1000);
+    	digitalWrite(A, LOW);
+    	digitalWrite(B, LOW);
+    	digitalWrite(D, LOW);
+        digitalWrite(E, LOW);
+    	digitalWrite(G, LOW);
+    	break;
+        
+    case 3:
+    	digitalWrite(A, HIGH);
+    	digitalWrite(B, HIGH);  		
+        digitalWrite(C, HIGH);
+    	digitalWrite(D, HIGH);
+        digitalWrite(G, HIGH);
+  		delay(1000);
+    	digitalWrite(A, LOW);  		
+    	digitalWrite(B, LOW);  		
+    	digitalWrite(C, LOW);  		
+        digitalWrite(D, LOW);  		
+    	digitalWrite(G, LOW);
+    	break;
+    case 4:
+    	digitalWrite(B, HIGH);
+    	digitalWrite(C, HIGH);
+        digitalWrite(F, HIGH);
+        digitalWrite(G, HIGH);
+  		delay(1000);
+    	digitalWrite(B, LOW);
+    	digitalWrite(C, LOW);
+        digitalWrite(F, LOW);
+    	digitalWrite(G, LOW);
+    	break;
+    case 5:
+    	digitalWrite(A, HIGH);
+    	digitalWrite(C, HIGH);
+        digitalWrite(D, HIGH);
+    	digitalWrite(F, HIGH);
+        digitalWrite(G, HIGH);
+  		delay(1000);
+    	digitalWrite(A, LOW);
+    	digitalWrite(C, LOW);
+    	digitalWrite(D, LOW);
+        digitalWrite(F, LOW);
+    	digitalWrite(G, LOW);
+    	break;
+    case 6:
+    	digitalWrite(A, HIGH);
+    	digitalWrite(B, HIGH);
+        digitalWrite(D, HIGH);
+    	digitalWrite(E, HIGH);
+        digitalWrite(G, HIGH);
+  		delay(1000);
+    	digitalWrite(A, LOW);
+    	digitalWrite(B, LOW);
+    	digitalWrite(D, LOW);
+        digitalWrite(E, LOW);
+    	digitalWrite(G, LOW);
+    	break;
+    case 7:
+    	digitalWrite(A, HIGH);
+    	digitalWrite(B, HIGH);
+        digitalWrite(C, HIGH);
+  		delay(1000);
+    	digitalWrite(A, LOW);
+    	digitalWrite(B, LOW);
+    	digitalWrite(C, LOW);
+    	break;
+    case 8:
+    	digitalWrite(A, HIGH);
+    	digitalWrite(B, HIGH);
+        digitalWrite(C, HIGH);
+        digitalWrite(D, HIGH);
+    	digitalWrite(E, HIGH);
+        digitalWrite(F, HIGH);
+        digitalWrite(G, HIGH);
+    	delay(1000);
+    	digitalWrite(A, LOW);
+    	digitalWrite(B, LOW);
+        digitalWrite(C, HIGH);
+    	digitalWrite(D, LOW);
+        digitalWrite(E, LOW);
+    	digitalWrite(F, HIGH);
+    	digitalWrite(G, LOW);
+    	break;
+    case 9:
+    	digitalWrite(A, HIGH);
+    	digitalWrite(B, HIGH);
+        digitalWrite(C, HIGH);
+    	digitalWrite(D, HIGH);
+        digitalWrite(F, HIGH);
+        digitalWrite(G, HIGH);
+  		delay(1000);
+    	digitalWrite(A, LOW);
+    	digitalWrite(B, LOW);
+    	digitalWrite(C, LOW);
+        digitalWrite(D, LOW);
+    	digitalWrite(F, LOW);
+        digitalWrite(G, LOW);
+    	break;
+    case 0:
+    	digitalWrite(A, HIGH);
+    	digitalWrite(B, HIGH);
+        digitalWrite(C, HIGH);
+    	digitalWrite(D, HIGH);
+        digitalWrite(E, HIGH);
+    	digitalWrite(F, HIGH);
+  		delay(1000);
+    	digitalWrite(A, LOW);
+    	digitalWrite(B, LOW);
+    	digitalWrite(C, LOW);
+        digitalWrite(D, LOW);
+    	digitalWrite(E, LOW);
+    	digitalWrite(F, LOW);
+    	break;
+    
+  }
+ 
+}
